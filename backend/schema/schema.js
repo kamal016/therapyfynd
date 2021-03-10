@@ -123,7 +123,7 @@ const RootQuery = new GraphQLObjectType({
             type: new GraphQLList(UsersType),
             resolve: async (parent, args)=>{
                 try{
-                    let user = await pool.query(`SELECT id, user_name,  email, timestamp FROM users  LIMIT 20`)
+                    let user = await pool.query(`SELECT id, user_name,  email, timestamp FROM users`)
                     return(user.rows); 
                 }catch(e){
                     console.log(e);
@@ -180,7 +180,6 @@ const Mutation = new GraphQLObjectType(
                     const timestamp = Date.now()
                     
                     let response = await pool.query(`INSERT INTO follow (followingid, userid, timestamp) VALUES ('${args.followingid}', '${args.userid}', '${timestamp}') RETURNING *`)
-                    console.log("Here is the problem",response.rows[0]);
                     return(response.rows[0]); 
                 }catch(e){
                     console.log(e);

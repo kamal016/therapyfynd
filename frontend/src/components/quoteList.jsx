@@ -24,8 +24,8 @@ function Quotelist(props) {
     if(!loading && data && data.user){
         const posts = data.user.followingPosts.filter(({post}) => post && post.trim() != '' );
        
-        const logs= posts.map(item => {
-            return <Card className="mr-3">
+        const logs= posts.map((item,index) => {
+            return <Card className="mr-3" key={index}>
                 <Card.Body>
                     <blockquote className="blockquote mb-0">
                     <p>
